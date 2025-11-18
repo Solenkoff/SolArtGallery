@@ -22,17 +22,6 @@ export default function Header() {
 
             </div>
 
-            {/* Mobile Nav */}
-            {isOpen && (
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="md:hidden bg-black text-red-600 flex flex-col gap-4 p-4 shadow-lg"
-                >
-                    {navigation.map(renderNav)}
-                </motion.div>
-            )}
         </header>
     );
 }

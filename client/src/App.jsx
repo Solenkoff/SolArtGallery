@@ -1,10 +1,13 @@
 import './App.css'
+import Footer from './components/footer/Footer'
+import Header from './components/header/Header'
 
 function App() {
 
     return (
         <>
-            <h1>Art Gallery</h1>
+            <Header />
+            <Footer />
         </>
     )
 }
