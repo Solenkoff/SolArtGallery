@@ -1,4 +1,5 @@
 import './App.css'
+import AuthorList from './components/author/AuthorList'
 import ContactUs from './components/contact/ContactUs'
 import Footer from './components/footer/Footer'
 import GalleryCatalog from './components/gallery/GalleryCatalog'
@@ -13,6 +14,7 @@ function App() {
             <ContactUs />
             <Home />
             <GalleryCatalog/>
+            <AuthorList />
             <Footer />
         </>
     )
