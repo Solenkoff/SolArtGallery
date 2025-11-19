@@ -5,6 +5,7 @@ import Footer from './components/footer/Footer'
 import GalleryCatalog from './components/gallery/GalleryCatalog'
 import Header from './components/header/Header'
 import Home from './components/home/Home'
+import LoginUser from './components/user/LoginUser'
 import RegisterUser from './components/user/RegisterUser'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Home />
             <GalleryCatalog/>
             <AuthorList />
+            <LoginUser />
             <RegisterUser />
             <Footer />
         </>
