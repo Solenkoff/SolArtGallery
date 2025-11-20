@@ -1,4 +1,4 @@
-export default function LoginUser() {
+export default function Login() {
 
     return (
         <div className="opacity-75 min-h-screen flex flex-col items-center justify-center text-red-600 text-center p-6">

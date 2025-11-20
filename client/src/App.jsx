@@ -1,28 +1,43 @@
-import './App.css'
+import { Route, Routes } from "react-router-dom";
+import ContextProvider from "./context/ContextProvider"
+
+import Home from './components/home/Home'
+import Header from './components/header/Header'
+import Login from './components/user/Login'
+import Register from './components/user/Register'
+import GalleryCatalog from './components/gallery/GalleryCatalog'
+import ItemDetails from './components/gallery/ItemDetails'
 import AuthorList from './components/author/AuthorList'
 import ContactUs from './components/contact/ContactUs'
 import Footer from './components/footer/Footer'
-import GalleryCatalog from './components/gallery/GalleryCatalog'
-import ItemDetails from './components/gallery/ItemDetails'
-import Header from './components/header/Header'
-import Home from './components/home/Home'
-import LoginUser from './components/user/LoginUser'
-import RegisterUser from './components/user/RegisterUser'
+
+import './App.css'
 
 function App() {
 
     return (
-        <>
+        <ContextProvider>
             <Header />
-            <ContactUs />
-            <Home />
-            <GalleryCatalog/>
-            <ItemDetails />
-            <AuthorList />
-            <LoginUser />
-            <RegisterUser />
+            <Routes>
+
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/author" element={<AuthorList />} />
+
+
+                <Route path="/gallery">
+                    <Route path="" element={<GalleryCatalog />} />
+                    {/* <Route path="/details/:itemID" element={<ItemDetails />} /> */}
+                </Route>
+
+                <Route path="/users">      // !!!
+                    <Route path="login" element={<Login />} />
+                    <Route path="register" element={<Register />} />
+                </Route>
+
+            </Routes>
             <Footer />
-        </>
+        </ContextProvider>
     )
 }
 

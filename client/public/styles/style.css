@@ -1,0 +1,12 @@
+.costum-bg {
+  z-index: 100;
+  background-image: url('../images/gallery_01.png');
+  background-size: cover;
+  background-position: center;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}

@@ -1,4 +1,4 @@
-export default function RegisterUser() {
+export default function Register() {
     return (
         <div className="opacity-75 min-h-screen flex flex-col items-center justify-center text-red-600 text-center p-6">
             <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
