@@ -1,27 +1,85 @@
+import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import context from "../../context/context";
+import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
+
+const navigation = [
+    { value: 'Gallery', href: '/gallery', auth: false },
+    { value: 'Authors', href: '/authors', auth: false },
+    { value: 'Inquire', href: '/inquire', auth: 'user' },
+    { value: 'Contact Us', href: '/contact', auth: false },
+    { value: 'Login', href: '/users/login', auth: 'guest' },
+    { value: 'Register', href: '/users/register', auth: 'guest' },
+    { value: 'Logout', href: '/users/logout', auth: 'user' },
+]
+
 export default function Header() {
+    const [isOpen, setIsOpen] = useState(false);
+    const { userSession } = useContext(context);
+
+    function isActive({ isActive }) {
+        return { color: isActive && "rgb(82, 133, 139)" }
+
+    }
+    function renderNav(nav) {
+        if (userSession && nav.auth != 'guest') {
+            return <NavLink style={isActive}
+                onClick={setIsOpen.bind(null, false)}
+                key={nav.value}
+                to={nav.href}
+                className="text-lg uppercase transition duration-300 hover:text-red-400"
+            >
+                {nav.value}
+            </NavLink >
+
+        } else if (!userSession && nav.auth != 'user') {
+            return <NavLink
+                style={isActive}
+                onClick={setIsOpen.bind(null, false)}
+                key={nav.value}
+                to={nav.href}
+                className="text-lg uppercase transition duration-300 hover:text-red-400"
+            >
+                {nav.value}
+            </NavLink>
+        }
+    }
 
     return (
-        <header className="bg-black text-red-600 shadow-lg fixed w-full z-50">
+        <header className="bg-[#232b2b] text-red-600 shadow-lg fixed w-full z-50">
             <div className="container mx-auto flex justify-between items-center p-4">
                 {/* Logo */}
-                <h1 className="text-3xl font-black tracking-widest gothic">SolArtGallery</h1>
+                <h1 className="text-4xl font-black tracking-widest gothic">
+                    <NavLink
+                        style={isActive}
+                        onClick={setIsOpen.bind(null, false)} to="/" >SolArtGallery
+                    </NavLink>
+                </h1>
 
                 {/* Desktop Nav */}
                 <nav className="hidden md:flex gap-6">
-                    <ul>
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Gallery</a></li>
-                        <li><a href="">Authors</a></li>
-                        <li><a href="">Inquire</a></li>
-                        <li><a href="">Contact Us</a></li>
-                        <li><a href="">Login</a></li>
-                        <li><a href="">Register</a></li>
-                        <li><a href="">Logout</a></li>
-                    </ul>
+                    {navigation.map(renderNav)}
                 </nav>
 
+                {/* Mobile Menu Button */}
+                <button className="md:hidden" onClick={setIsOpen.bind(null, !isOpen)}>
+                    {isOpen ? <X size={28} /> : <Menu size={28} />}
+                </button>
             </div>
 
+            {/* Mobile Nav */}
+            {isOpen && (
+                <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="md:hidden bg-black text-red-600 flex flex-col gap-4 p-4 shadow-lg"
+                >
+                    {navigation.map(renderNav)}
+                </motion.div>
+            )}
         </header>
     );
 }
+
