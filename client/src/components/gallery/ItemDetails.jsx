@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-export default function DetailsSection() {
+export default function ItemDetails() {
     const [item, setItem] = useState(null);
     const { itemId } = useParams(); 
 
