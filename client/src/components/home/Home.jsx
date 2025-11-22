@@ -5,7 +5,6 @@ export default function Home() {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-
         fetch('https://dummyjson.com/users')
             .then(res => res.json())
             .then(result => setItems(result.users.slice(0, 4))
