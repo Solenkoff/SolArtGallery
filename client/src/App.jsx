@@ -27,7 +27,7 @@ function App() {
 
                 <Route path="/gallery">
                     <Route path="" element={<GalleryCatalog />} />
-                    {/* <Route path="/details/:itemID" element={<ItemDetails />} /> */}
+                    <Route path="details/:itemId" element={<ItemDetails />} />
                 </Route>
 
                 <Route path="/users">      // !!!
