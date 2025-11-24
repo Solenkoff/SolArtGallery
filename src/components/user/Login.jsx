@@ -1,22 +1,28 @@
-import { useContext, useActionState  } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { setUserData } from "../../utils/userSession";
 import userService from "../../api/userService";
 import context from "../../context/context";
 
 export default function Login() {
-
+    const [isPending, setIsPending] = useState(false);
+    const [userInput, setUserInput] = useState({});
+    const [error, setError] = useState(null);
+    
     const { setUserSession } = useContext(context)
-    const [{ error, userInput }, formAction, isPending] = useActionState(onLogin, { 
-        error: null, 
-        userInput: null 
-    });
     const navigate = useNavigate()
 
-    async function onLogin(previousState, formData) {
+    async function onLogin(e) {
+        e.preventDefault();
+
+        setIsPending(true);
+
+        const formData = new FormData(e.currentTarget);
         const userInput = Object.fromEntries(formData);
+
         try {
             const user = await userService.loginUser(userInput);
+
             const userData = {
                 username: user.username,
                 email: user.email,
@@ -25,11 +31,13 @@ export default function Login() {
             };
 
             setUserData(userData);
-            setUserSession(userData)
+            setUserSession(userData);
             navigate('/');
-            return user
         } catch (error) {
-            return { error: error.message, userInput }
+            setError(error.message);
+            setUserInput(input);
+        } finally {
+            setIsPending(false);
         }
     }
 
@@ -38,7 +46,7 @@ export default function Login() {
             <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-lg">
                 <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
                 {error && <p className="error">{error}</p>}
-                <form action={formAction}>
+                <form onSubmit={onLogin}>
                     <div className="mb-4">
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">Username</label>
                         <input
