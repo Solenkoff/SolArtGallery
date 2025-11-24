@@ -13,7 +13,7 @@ import ItemDetails from './components/gallery/ItemDetails'
 import AuthorList from './components/author/AuthorList'
 import ContactUs from './components/contact/ContactUs'
 import Footer from './components/footer/Footer'
-// import Logout from "./components/user/Logout";
+import Logout from "./components/user/Logout";
 
 import './App.css'
 
@@ -47,7 +47,7 @@ function App() {
                             <Route path="/users">
                                 <Route path="login" element={<Login />} />
                                 <Route path="register" element={<Register />} />
-                                {/* <Route path="logout" element={<Logout />} /> */}
+                                <Route path="logout" element={<Logout />} />
                             </Route>
 
                         </Routes>
