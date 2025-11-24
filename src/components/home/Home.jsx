@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import context from "../../context/context";
+import { Link } from "react-router-dom";
 
 export default function Home() {
-
+    const { userSession } = useContext(context);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
@@ -24,12 +26,13 @@ export default function Home() {
             </p>
 
             {/* Call to Action */}
-            <a
-                href="#inquire"
-                className="mt-6 px-6 py-3 bg-red-600 text-black text-xl font-bold uppercase rounded-lg shadow-lg hover:bg-red-800 transition"
-            >
-                Inquire an Artwork you are interested in.
-            </a>
+            {userSession &&
+                <Link to={"/contact"}
+                    href="#contact"
+                    className="mt-6 px-6 py-3 bg-red-600 text-black text-xl font-bold uppercase rounded-lg shadow-lg hover:bg-red-800 transition"
+                >
+                    Message Author
+                </Link>}
             <div className="mt-16 w-full text-center">
                 <h2 className="text-3xl font-bold text-black mb-8">Most recent Artworks</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 ">

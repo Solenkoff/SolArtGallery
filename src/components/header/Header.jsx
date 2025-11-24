@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
-import context from "../../context/context";
 import { Menu, X } from "lucide-react";
 import { motion } from "framer-motion";
+
+import context from "../../context/context";
 
 const navigation = [
     { value: 'Gallery', href: '/gallery', auth: false },
@@ -62,6 +63,7 @@ export default function Header() {
                     {navigation.map(renderNav)}
                 </nav>
 
+                {userSession && <em className='mr-2'>{userSession.email}</em>}
                 {/* Mobile Menu Button */}
                 <button className="md:hidden" onClick={setIsOpen.bind(null, !isOpen)}>
                     {isOpen ? <X size={28} /> : <Menu size={28} />}
